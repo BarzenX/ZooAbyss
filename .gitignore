@@ -1,0 +1,11 @@
+﻿################################################################################
+# Diese .gitignore-Datei wurde von Microsoft(R) Visual Studio automatisch erstellt.
+################################################################################
+
+/.vs/ZooAbyss/DesignTimeBuild/.dtbcache.v2
+/.vs/ZooAbyss/FileContentIndex
+/.vs/ProjectEvaluation
+/.vs/ZooAbyss/v17
+/.vs
+/bin/Debug/net6.0
+/obj
