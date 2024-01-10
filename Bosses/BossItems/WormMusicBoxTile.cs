@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -23,8 +24,7 @@ namespace ZooAbyss.Bosses.BossItems
             TileObjectData.addTile(Type);
 
 
-            ModTranslation name = CreateMapEntryName();
-            name.SetDefault("Music Box");
+            LocalizedText name = CreateMapEntryName();
             AddMapEntry(new Color(200, 200, 200), name);
         }
 

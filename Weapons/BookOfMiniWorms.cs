@@ -8,13 +8,6 @@ namespace ZooAbyss.Weapons
 {
     public class BookOfMiniWorms : ModItem
     {
-
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("BookOfMiniWorms");
-            Tooltip.SetDefault("Will return to it's rightful owner");
-        }
-
         public override void SetDefaults()
         {
             Item.damage = 20;

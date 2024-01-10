@@ -11,9 +11,6 @@ namespace ZooAbyss.Bosses.BossItems
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Fat Worm");
-            Tooltip.SetDefault("Summons A godly Mother");
-
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;
             ItemID.Sets.SortingPriorityBossSpawns[Type] = 12; // This helps sort inventory know that this is a boss summoning Item.
 
@@ -27,13 +24,14 @@ namespace ZooAbyss.Bosses.BossItems
         {
             Item.width = 20;
             Item.height = 20;
-            Item.maxStack = 1;
+            Item.maxStack = Item.CommonMaxStack;
             Item.value = 100;
             Item.rare = ItemRarityID.Pink;
             Item.useAnimation = 30;
             Item.useTime = 30;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.consumable = true;
+
            
         }
 
@@ -53,7 +51,7 @@ namespace ZooAbyss.Bosses.BossItems
                 // (explicitely excluded serverside here)
                 SoundEngine.PlaySound(SoundID.Roar, player.position);
 
-                int type = ModContent.NPCType<MotherWurmHead>();
+                int type = ModContent.NPCType<MotherWurmEntity>();
 
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
@@ -64,7 +62,7 @@ namespace ZooAbyss.Bosses.BossItems
                 {
                     // If the player is in multiplayer, request a spawn
                     // This will only work if NPCID.Sets.MPAllowedEnemies[type] is true, which we set in MinionBossBody
-                    NetMessage.SendData(MessageID.SpawnBoss, number: player.whoAmI, number2: type);
+                    NetMessage.SendData(MessageID.SpawnBossUseLicenseStartEvent, number: player.whoAmI, number2: type);
                 }
             }
 

@@ -8,12 +8,6 @@ namespace ZooAbyss.Weapons
 {
     public class TerraFormer : ModItem   
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Terraformer");
-            Tooltip.SetDefault("Feel the ground tremble beneath you");
-        }
-
         public override void SetDefaults()
         {
             Item.damage = 160;

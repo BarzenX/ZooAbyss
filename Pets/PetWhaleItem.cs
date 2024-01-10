@@ -10,7 +10,6 @@ namespace ZooAbyss.Pets
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Musical Whale Microphone");
             // Names and descriptions of all ExamplePetX classes are defined using .hjson files in the Localization folder
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
@@ -19,7 +18,7 @@ namespace ZooAbyss.Pets
         {
             Item.CloneDefaults(ItemID.ZephyrFish); // Copy the Defaults of the Zephyr Fish Item.
 
-            Item.shoot = ModContent.ProjectileType<PetWhale>(); // "Shoot" your pet projectile.
+            Item.shoot = ModContent.ProjectileType<PetWhaleProjectile>(); // "Shoot" your pet projectile.
             Item.buffType = ModContent.BuffType<PetWhaleBuff>(); // Apply buff upon usage of the Item.
             Item.shootSpeed = 16;
         }

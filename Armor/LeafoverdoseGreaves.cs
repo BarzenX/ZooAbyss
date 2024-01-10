@@ -13,9 +13,6 @@ namespace ZooAbyss.Armor
 	{
 		public override void SetStaticDefaults()
 		{
-			// Item Name, Flavor Text/
-            DisplayName.SetDefault("LeafOverdoseGreaves");
-			Tooltip.SetDefault("the bottems of natures." + "\n5% increased movement speed"); //Not sure why this was divided into two lines.
 			// Journey Mode sacrifice/research amount.
 			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 		}

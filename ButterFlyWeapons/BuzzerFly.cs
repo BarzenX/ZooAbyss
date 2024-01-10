@@ -1,25 +1,18 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using ZooAbyss.Edits;
 using ZooAbyss.ButterFlyWeaponsProj;
+using ZooAbyss.DamageClasses;
 
 namespace ZooAbyss.ButterFlyWeapons
 {
     public class BuzzerFly : ModItem
     {
-
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("BuzzerFly");
-            Tooltip.SetDefault("A Butterfly Of Honey will Heal your Soul On Hit Enemy");
-        }
-
         public override void SetDefaults()
         {
             Item.damage = 10;
             Item.knockBack = 2;
-            Item.DamageType = ModContent.GetInstance<Flutter>();
+            Item.DamageType = ModContent.GetInstance<CaretakerFlutterDamageClass>();
             Item.noUseGraphic = true;
             Item.useTime = 10;
             Item.autoReuse = false;

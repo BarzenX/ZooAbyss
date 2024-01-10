@@ -5,12 +5,7 @@ using Terraria.ModLoader;
 namespace ZooAbyss.SummitProj
 {
     public class SummitPZenith9 : ModProjectile
-
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("wItH a BuTtErFlY");
-        }
         public int ProjDelay = 20; // frames remaining till we can fire a projectile again
         public int ProjDamage = 200; // frames remaining till we can fire a projectile again
         public override void SetDefaults()
@@ -70,7 +65,7 @@ namespace ZooAbyss.SummitProj
             }
         }
 
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.Kill();
         }

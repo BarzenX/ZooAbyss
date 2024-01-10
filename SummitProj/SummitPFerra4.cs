@@ -7,12 +7,7 @@ using Terraria.ModLoader;
 namespace ZooAbyss.SummitProj
 {
     public class SummitPFerra4: ModProjectile
-
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("wItH a BuTtErFlY");
-        }
         public int ProjDelay = 10; // frames remaining till we can fire a projectile again
         public int ProjDamage = 250; // frames remaining till we can fire a projectile again
         public override void SetDefaults()
@@ -38,7 +33,7 @@ namespace ZooAbyss.SummitProj
             Main.dust[dust].velocity *= 0.3f;
             Main.dust[dust].scale = (float)Main.rand.Next(50, 135) * 0.012f;
 
-            int dust2 = Dust.NewDust(Projectile.Center, 1, 1, DustID.PinkTorch, 0f, 0f, 0, default(Color), 1f);
+            int dust2 = Dust.NewDust(Projectile.Center, 1, 1, DustID.PinkTorch, 0f, 0f, 0, default, 1f);
             Main.dust[dust2].noGravity = true;
             Main.dust[dust2].velocity *= 0.3f;
             Main.dust[dust2].scale = (float)Main.rand.Next(50, 135) * 0.012f;
@@ -59,7 +54,7 @@ namespace ZooAbyss.SummitProj
 
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
 
             target.AddBuff(BuffID.Venom, 300);

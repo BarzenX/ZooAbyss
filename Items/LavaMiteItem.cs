@@ -2,6 +2,7 @@
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
+using ZooAbyss.NPCs;
 
 namespace ZooAbyss.Items
 {
@@ -9,19 +10,28 @@ namespace ZooAbyss.Items
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Lava Mite");
-            Tooltip.SetDefault("It's warm and jiggly");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
         {
+            Item.rare = ItemRarityID.Orange;
+            Item.scale = 1;
+            Item.value = Item.buyPrice(silver: 15);
+
+            Item.useStyle = 1;
+            Item.autoReuse = true;
+            Item.useTurn = true;
+            Item.useAnimation = 15;
+            Item.useTime = 10;
+            Item.maxStack = Item.CommonMaxStack;
+            Item.consumable = true;
             Item.width = 20;
             Item.height = 20;
-            Item.rare = ItemRarityID.Orange;
+            Item.makeNPC = ModContent.NPCType<LavaMite>(); ;
+            Item.noUseGraphic = true;
 
-            Item.maxStack = 99;
-            Item.value = Item.buyPrice(silver: 15);
+            Item.bait = 20;
 
         }
     }

@@ -1,22 +1,18 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using ZooAbyss.Edits;
+using ZooAbyss.DamageClasses;
 
 namespace ZooAbyss.ButterFlyWeaponsProj
 {
     public class BoneButterFlyP : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("wItH a BuTtErFlY");
-        }
         public int ProjDelay = 10; // frames remaining till we can fire a projectile again
         public int ProjDamage = 20;
 
         public override void SetDefaults()
         {
-            Projectile.DamageType = ModContent.GetInstance<Flutter>();
+            Projectile.DamageType = ModContent.GetInstance<CaretakerFlutterDamageClass>();
             Projectile.width = 32;
             Projectile.height = 32;
             Projectile.friendly = true;

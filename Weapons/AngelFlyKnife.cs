@@ -7,13 +7,6 @@ namespace ZooAbyss.Weapons
 {
     public class AngelFlyKnife : ModItem
     {
-
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Angel's Butterfly Knife");
-            Tooltip.SetDefault("Will return to it's rightful owner");
-        }
-
         public override void SetDefaults()
         {
             Item.damage = 140;

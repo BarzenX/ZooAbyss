@@ -12,7 +12,7 @@ namespace ZooAbyss.Edits
             {
                 if (npc.netID == NPCID.QueenSlimeBoss) 
                     {
-                    npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<HallowedButterFly>(), 2));
+                    npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<QueenButterFly>(), 2));
                 }
             }
         }

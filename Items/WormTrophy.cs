@@ -1,4 +1,5 @@
 ﻿using Terraria;
+using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 using ZooAbyss.Tiles;
@@ -9,8 +10,7 @@ namespace ZooAbyss.Items
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("WurmTrophy");
-            SacrificeTotal = 1;
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
@@ -25,7 +25,7 @@ namespace ZooAbyss.Items
             Item.createTile = ModContent.TileType<WormTrophyTile>();
             Item.width = 12;
             Item.height = 12;
-            Item.rare = 8;
+            Item.rare = ItemRarityID.Yellow;
         }
 
        

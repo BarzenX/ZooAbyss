@@ -7,11 +7,6 @@ namespace ZooAbyss.projectiles
 {
     public class EvilFlyKnifeP : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Angel's Wrath");
-        }
-
         public override void SetDefaults()
         {
             Projectile.DamageType = DamageClass.Ranged;

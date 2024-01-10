@@ -7,12 +7,7 @@ using Terraria.ModLoader;
 namespace ZooAbyss.SummitProj
 {
     public class SummitPWeaking8 : ModProjectile
-
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("wItH a BuTtErFlY");
-        }
         public int ProjDelay = 10; // frames remaining till we can fire a projectile again
         public int ProjDamage = 2000; // frames remaining till we can fire a projectile again
         public override void SetDefaults()
@@ -58,7 +53,7 @@ namespace ZooAbyss.SummitProj
                 }
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
 
             target.AddBuff(BuffID.Ichor, 300);

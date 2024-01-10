@@ -6,12 +6,7 @@ using Terraria.ModLoader;
 namespace ZooAbyss.SummitProj
 {
     public class SummitP : ModProjectile
-
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("wItH a BuTtErFlY");
-        }
         public int ProjDelay = 10; // frames remaining till we can fire a projectile again
         public int ProjDamage = 125; // frames remaining till we can fire a projectile again
         public override void SetDefaults()

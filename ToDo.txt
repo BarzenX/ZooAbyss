@@ -1,0 +1,2 @@
+- ButterFlys need damaged balanced and better damage-progression
+- sprites for Pet Whale, Wheel Barrow and Fat Worm must be created anew (they were too big, I resized them as a quick action but now they don't blend well with Terrarias artstyle. The only way of fixing that is creating them anew with the imagie size they shall have ingame)

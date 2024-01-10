@@ -11,8 +11,9 @@ namespace ZooAbyss.NPCs
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Spider");
             Main.npcFrameCount[NPC.type] = 4;
+            Main.npcCatchable[NPC.type] = true;
+            NPCID.Sets.CountsAsCritter[NPC.type] = true;
 
         }
 

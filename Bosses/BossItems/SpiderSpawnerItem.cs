@@ -1,4 +1,5 @@
 ﻿using Terraria;
+using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
 using ZooAbyss.Bosses;
@@ -11,8 +12,7 @@ namespace ZooAbyss.Bosses.BossItems
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("SpiderSpawnerItem");
-            SacrificeTotal = 1;
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
         public override void SetDefaults()
@@ -27,7 +27,7 @@ namespace ZooAbyss.Bosses.BossItems
             Item.createTile = ModContent.TileType<SpiderSpawner>();
             Item.width = 12;
             Item.height = 12;
-            Item.rare = 8;
+            Item.rare = ItemRarityID.Yellow;
         }
     }
 }

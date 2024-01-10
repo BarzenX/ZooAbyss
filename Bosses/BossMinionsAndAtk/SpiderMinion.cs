@@ -13,11 +13,6 @@ namespace ZooAbyss.Bosses.BossMinionsAndAtk
         private const int MAX_JUMP_TIME = 60;
         private int jumpDelay = 5 * 60; // 5 seconds in frames
 
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Spider Minion");
-        }
-
         public override void SetDefaults()
         {
             NPC.width = 32;

@@ -1,0 +1,335 @@
+Tiles.WormMusicBoxTile.MapEntry: Music Box
+
+DamageClasses: {
+	CaretakerFlutterDamageClass.DisplayName: fauna damage
+	FloraDamageClass.DisplayName: flora damage
+}
+
+Buffs: {
+	PetWhaleBuff: {
+		DisplayName: Pet Whale
+		Description: Not many people have one!
+	}
+}
+
+Items: {
+	WheelBarrow: {
+		DisplayName: Wheel Barrow
+		Tooltip:
+			'''
+			5% increased {$Mods.ZooAbyss.DamageClasses.FloraDamageClass.DisplayName}
+			5% increased flora firing speed
+			'''
+	}
+
+	TranqBulletAmmo: {
+		DisplayName: Tranq Bullet
+		Tooltip: Ball infused with cobra venom ...use wisely!
+	}
+
+	TranqDartAmmo: {
+		DisplayName: Tranq Dart
+		Tooltip: Sleepy sleepy time little animals
+	}
+
+	LeafletChestplate: {
+		DisplayName: Leaf Overdose Breastplate
+		Tooltip: A living place for creatures and plants alike
+	}
+
+	LeafoverdoseGreaves: {
+		DisplayName: Leaf Overdose Greaves
+		Tooltip:
+			'''
+			5% increased movement speed
+			'The bottoms of nature'
+			'''
+	}
+
+	LeafoverdoseHead: {
+		DisplayName: Leaf Overdose Helmet
+		Tooltip: A blossoming environment
+	}
+
+	LeafoverdoseHelmet: {
+		DisplayName: Leaf Overdose Mask
+		Tooltip: Get your head in the trees!
+	}
+
+	Leaf: {
+		DisplayName: Leaf
+		Tooltip: Just a simple leaf
+	}
+
+	FatWorm: {
+		DisplayName: Fat Worm
+		Tooltip: Summons a godly mother
+	}
+
+	MotherWormBossBag: {
+		DisplayName: Mother Wurm Bag
+		Tooltip: "{$CommonItemTooltip.RightClickToOpen}"
+	}
+
+	SpiderSpawnerItem: {
+		DisplayName: Spider Spawner
+		Tooltip: ""
+	}
+
+	WormMusicBoxItem: {
+		DisplayName: Worm Music Box
+		Tooltip: Plays a tune when activated
+	}
+
+	BoneButterFly: {
+		DisplayName: Calciumfly
+		Tooltip: What is it doing down here?
+	}
+
+	BuzzerFly: {
+		DisplayName: Buzzerfly
+		Tooltip: A butterfly of honey will heal your soul by hitting an enemy
+	}
+
+	CorruptorFly: {
+		DisplayName: Eater of Butterflies
+		Tooltip: A butterfly of pure purple
+	}
+
+	CursedButterFly: {
+		DisplayName: Cursefly
+		Tooltip: A cursed butterfly
+	}
+
+	ExcaliFly: {
+		DisplayName: Excalifly
+		Tooltip: A hallowed force
+	}
+
+	GutterFly: {
+		DisplayName: Gutterfly
+		Tooltip: A butterfly infused with crimson red
+	}
+
+	QueenButterFly: {
+		DisplayName: Queen Butterfly
+		Tooltip: It's the queen of butterflies
+	}
+
+	KingButterFly: {
+		DisplayName: King Butterfly
+		Tooltip: "'Hail to the king, baby!'"
+	}
+
+	NightsButterFly: {
+		DisplayName: Eclipse Butterfly
+		Tooltip: A combined force
+	}
+
+	PlantFerra: {
+		DisplayName: Plant Ferra
+		Tooltip: Earth, wind, fire, do you remember?
+	}
+
+	RustyButterFly: {
+		DisplayName: Rusty Butterfly
+		Tooltip: Actually pretty sharp
+	}
+
+	TerraButterFly: {
+		DisplayName: Terra Butterfly
+		Tooltip: The unification of good and evil
+	}
+
+	TheOneSummit: {
+		DisplayName: The One Summit
+		Tooltip: Can it get any better?
+	}
+
+	TrueExcaliFly: {
+		DisplayName: True Excalifly
+		Tooltip: A stronger hallowed force
+	}
+
+	TrueNightsButterFly: {
+		DisplayName: True Nights Butterfly
+		Tooltip: A stronger combined force
+	}
+
+	WeakingButterFly: {
+		DisplayName: Weaking Butterfly
+		Tooltip: ""
+	}
+
+	ZenFly: {
+		DisplayName: Zenfly
+		Tooltip: ""
+	}
+
+	WurmHook: {
+		DisplayName: Wurm Hook
+		Tooltip: ""
+	}
+
+	BottleOfCobraVenom: {
+		DisplayName: Bottle of Cobra Venom
+		Tooltip: It makes you sleepy
+	}
+
+	BottleOfSpiderVenom: {
+		DisplayName: Bottle of Spider Venom
+		Tooltip: It makes you sick
+	}
+
+	CobraItem: {
+		DisplayName: Cobra
+		Tooltip: Hssssss
+	}
+
+	CobraVenom: {
+		DisplayName: Cobra Venom
+		Tooltip: Quickly put it in a Container
+	}
+
+	DesertFlyItem: {
+		DisplayName: Desert Fly
+		Tooltip: BuzZ BuzZ..
+	}
+
+	LavaLump: {
+		DisplayName: Lava Lump
+		Tooltip: A little warm lump
+	}
+
+	LavaMiteItem: {
+		DisplayName: Lava Mite
+		Tooltip: It's warm and jiggly
+	}
+
+	SpiderCage: {
+		DisplayName: Spider Cage
+		Tooltip: ""
+	}
+
+	SpiderItem: {
+		DisplayName: Spider
+		Tooltip: It emits a faint light
+	}
+
+	SpiderVenom: {
+		DisplayName: Spider Venom
+		Tooltip: Don't touch it
+	}
+
+	WormTrophy: {
+		DisplayName: Worm Trophy
+		Tooltip: ""
+	}
+
+	PetWhaleItem: {
+		DisplayName: Musical Whale Microphone
+		Tooltip: ""
+	}
+
+	AngelFlyKnife: {
+		DisplayName: Angel's Butterfly Knife
+		Tooltip: Will return to it's rightful owner
+	}
+
+	BookOfMiniWorms: {
+		DisplayName: Book of Mini Worms
+		Tooltip: ""
+	}
+
+	CatTailSpear: {
+		DisplayName: Cattail Spear
+		Tooltip: ""
+	}
+
+	EvilFlyKnife: {
+		DisplayName: Evil's Flying Knife
+		Tooltip: It's the Yin Yang of Evil
+	}
+
+	FlyKnife: {
+		DisplayName: ButterFlyKnife
+		Tooltip: Your average butterfly knife
+	}
+
+	TerraFormer: {
+		DisplayName: The Terraformer
+		Tooltip: Feel the ground tremble beneath you
+	}
+
+	TheGunHard: {
+		DisplayName: The Pistol of the Jungle Destroyers
+		Tooltip: Use with a special type of ammo to down an animal
+	}
+
+	TheGunPre: {
+		DisplayName: The Rifle of the Jungle Sleepers
+		Tooltip: Use with a special type of ammo to down an animal
+	}
+
+	GreenBeetleItem: {
+		DisplayName: Green Beetle
+		Tooltip: ""
+	}
+}
+
+NPCs: {
+	SpiderMinion.DisplayName: Spider Minion
+	Spider.DisplayName: Spider
+	MotherWurmEntity.DisplayName: Mother Wurm
+	MotherWurmBody.DisplayName: Mother Wurm
+	MotherWurmHead.DisplayName: Mother Wurm
+	MotherWurmTail.DisplayName: Mother Wurm
+	Phoenix.DisplayName: Phoenix
+	Cobra.DisplayName: Cobra
+	DesertFly.DisplayName: Desert Fly
+	GreenBeetle.DisplayName: Green Beetle
+	LavaMite.DisplayName: Lava Mite
+	RustyButterFlyNPC.DisplayName: Rusty Butterfly
+}
+
+Projectiles: {
+	WebSpitProjectile.DisplayName: Web Spit
+	P.DisplayName: wItH a BuTtErFlY
+	BuzzerFlyP.DisplayName: wItH a BuTtErFlY
+	CorruptorFlyP.DisplayName: wItH a BuTtErFlY
+	CursedButterFlyP.DisplayName: wItH a BuTtErFlY
+	ExcaliFlyP.DisplayName: wItH a BuTtErFlY
+	GutterFlyP.DisplayName: wItH a BuTtErFlY
+	QueenButterFlyP.DisplayName: wItH a BuTtErFlY
+	KingButterFlyP.DisplayName: wItH a BuTtErFlY
+	NightsButterFlyP.DisplayName: wItH a BuTtErFlY
+	PlantFerraP.DisplayName: wItH a BuTtErFlY
+	RustyButterFlyP.DisplayName: wItH a BuTtErFlY
+	TerraButterFlyP.DisplayName: wItH a BuTtErFlY
+	TrueExcaliFlyP.DisplayName: wItH a BuTtErFlY
+	TrueNightsButterFlyP.DisplayName: wItH a BuTtErFlY
+	WeakingButterFlyP.DisplayName: wItH a BuTtErFlY
+	ZenFlyP.DisplayName: wItH a BuTtErFlY
+	ZenFlyPProj.DisplayName: wItH a BuTtErFlY
+	WurmHookProj.DisplayName: Wurm Hook
+	PetWhale.DisplayName: Pet Whale
+	AngelFlyKnifeP.DisplayName: Angel's Wrath
+	BookOfMiniWormsP.DisplayName: Book Of Mini Worms
+	CatTailSpearP.DisplayName: Cattail Spear
+	EvilFlyKnifeP.DisplayName: Evil's Wrath
+	FlyKnifeP.DisplayName: Fly Knife P
+	TerraFormerP.DisplayName: The Terraformer
+	TranqBulletP.DisplayName: Tranq Bullet
+	TranqDartP.DisplayName: Tranq Dart
+	SummitP.DisplayName: Summit
+	SummitPBuzzer2.DisplayName: wItH a BuTtErFlY
+	SummitPCursed3.DisplayName: wItH a BuTtErFlY
+	SummitPFerra4.DisplayName: wItH a BuTtErFlY
+	SummitPKing5.DisplayName: wItH a BuTtErFlY
+	SummitPQueen6.DisplayName: wItH a BuTtErFlY
+	SummitPTerra7.DisplayName: wItH a BuTtErFlY
+	SummitPWeaking8.DisplayName: wItH a BuTtErFlY
+	SummitPZenith9.DisplayName: wItH a BuTtErFlY
+	BoneButterFlyP.DisplayName: Bone Butterfly
+	PetWhaleProjectile.DisplayName: Pet Whale
+}

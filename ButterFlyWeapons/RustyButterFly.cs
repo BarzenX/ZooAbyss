@@ -1,25 +1,18 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using ZooAbyss.Edits;
 using ZooAbyss.ButterFlyWeaponsProj;
+using ZooAbyss.DamageClasses;
 
 namespace ZooAbyss.ButterFlyWeapons
 {
     public class RustyButterFly : ModItem
     {
-
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("RustyButterFly");
-            Tooltip.SetDefault("Actually prettysharp");
-        }
-
         public override void SetDefaults()
         {
             Item.damage = 10;
             Item.knockBack = 2;
-            Item.DamageType = ModContent.GetInstance<Flutter>();
+            Item.DamageType = ModContent.GetInstance<CaretakerFlutterDamageClass>();
             Item.noUseGraphic = true;
             Item.autoReuse = false;
             Item.UseSound = SoundID.Item1;

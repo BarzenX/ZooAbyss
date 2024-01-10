@@ -1,25 +1,18 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using ZooAbyss.Edits;
 using ZooAbyss.ButterFlyWeaponsProj;
+using ZooAbyss.DamageClasses;
 
 namespace ZooAbyss.ButterFlyWeapons
 {
     public class CorruptorFly : ModItem
     {
-
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Eather Of ButterFlies");
-            Tooltip.SetDefault("A Butterfly Of PurePurple");
-        }
-
         public override void SetDefaults()
         {
             Item.damage = 20;
             Item.knockBack = 2;
-            Item.DamageType = ModContent.GetInstance<Flutter>();
+            Item.DamageType = ModContent.GetInstance<CaretakerFlutterDamageClass>();
             Item.noUseGraphic = true;
             Item.useTime = 10;
             Item.autoReuse = false;

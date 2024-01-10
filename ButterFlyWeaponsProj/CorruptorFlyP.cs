@@ -1,20 +1,15 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using ZooAbyss.Edits;
+using ZooAbyss.DamageClasses;
 
 namespace ZooAbyss.ButterFlyWeaponsProj
 {
     public class CorruptorFlyP : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("wItH a BuTtErFlY");
-        }
-
         public override void SetDefaults()
         {
-            Projectile.DamageType = ModContent.GetInstance<Flutter>();
+            Projectile.DamageType = ModContent.GetInstance<CaretakerFlutterDamageClass>();
             Projectile.width = 32;
             Projectile.height = 32;
             Projectile.friendly = true;
@@ -37,7 +32,7 @@ namespace ZooAbyss.ButterFlyWeaponsProj
             Main.dust[dust2].velocity *= 0.3f;
             Main.dust[dust2].scale = Main.rand.Next(50, 135) * 0.012f;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(BuffID.Frostburn2, 300);
         }

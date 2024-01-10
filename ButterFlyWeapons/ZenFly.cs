@@ -1,25 +1,18 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using ZooAbyss.Edits;
 using ZooAbyss.ButterFlyWeaponsProj;
+using ZooAbyss.DamageClasses;
 
 namespace ZooAbyss.ButterFlyWeapons
 {
     public class ZenFly : ModItem
     {
-
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("ZenFly");
-            Tooltip.SetDefault("What is it doing down here?");
-        }
-
         public override void SetDefaults()
         {
             Item.damage = 20;
             Item.knockBack = 2;
-            Item.DamageType = ModContent.GetInstance<Flutter>();
+            Item.DamageType = ModContent.GetInstance<CaretakerFlutterDamageClass>();
             Item.noUseGraphic = true;
             Item.useTime = 10;
             Item.autoReuse = false;
@@ -42,7 +35,7 @@ namespace ZooAbyss.ButterFlyWeapons
         {
             CreateRecipe(1)
                 .AddIngredient(ModContent.ItemType<TrueNightsButterFly>(), 1)
-                .AddIngredient(ModContent.ItemType<TrueExUtterFly>(), 1)
+                .AddIngredient(ModContent.ItemType<TrueExcaliFly>(), 1)
                 .AddIngredient(ItemID.BrokenHeroSword, 1)
                 .AddTile(TileID.MythrilAnvil)
                 .Register();

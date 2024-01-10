@@ -30,7 +30,7 @@ namespace ZooAbyss.Bosses.BossMinionsAndAtk
             }
         }
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
             int cobwebX = (int)(Projectile.Center.X / 4f);
             int cobwebY = (int)(Projectile.Center.Y / 4f);

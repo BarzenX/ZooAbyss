@@ -13,9 +13,6 @@ namespace ZooAbyss.Armor
     {
         public override void SetStaticDefaults()
         {
-            //Item Name, Flavor Text
-            DisplayName.SetDefault("LeafOverdoseBreastplate");
-            Tooltip.SetDefault("A living place for creatures and plants alike.");
             // Journey Mode sacrifice/research amount.
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
@@ -35,9 +32,11 @@ namespace ZooAbyss.Armor
         
         public override void UpdateEquip(Player player)
         {
-            //Increases the following stats by the following amounts.
-            player.statDefense = 3;
-            
+            // UpdateEquips is responsible for applying buffs / mana / more minions etc. to the player if the (freely programmable) conditions are met and the accessory is equipped.
+            // Examples:
+            //player.buffImmune[BuffID.OnFire] = true; // Make the player immune to Fire
+            //player.statManaMax2 += MaxManaIncrease; // Increase how many mana points the player can have by 20
+            //player.maxMinions += MaxMinionIncrease; // Increase how many minions the player can have by one
 
         }
 

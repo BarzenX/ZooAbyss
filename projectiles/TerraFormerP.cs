@@ -8,11 +8,6 @@ namespace ZooAbyss.projectiles
 {
     public class TerraFormerP : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("The Terraformer");
-        }
-
         public override void SetDefaults()
         {
             Projectile.netImportant = true;
@@ -30,9 +25,6 @@ namespace ZooAbyss.projectiles
             Projectile.penetrate = -1;
             Projectile.timeLeft = 100;
             Projectile.timeLeft = 500;
-
-
-
         }
 
 
@@ -49,9 +41,9 @@ namespace ZooAbyss.projectiles
             Main.dust[dust2].velocity *= 0.3f;
             Main.dust[dust2].scale = Main.rand.Next(50, 135) * 0.013f;
         }
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
         {
-            Vector2 launchVelocity = new Vector2(-4, 0);
+            Vector2 launchVelocity = new (-4, 0);
             for (int i = 0; i < 4; i++)
             {
                 launchVelocity = launchVelocity.RotatedBy(MathHelper.PiOver4);
@@ -81,15 +73,15 @@ namespace ZooAbyss.projectiles
             // Hover on the method below in VS to see its summary.
             return base.OnTileCollide(oldVelocity);
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.immune[Projectile.owner] = 6;
-            OnHitEffects(target.Center, crit);
+            OnHitEffects(target.Center, hit.Crit);
         }
 
-        public override void OnHitPvp(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            OnHitEffects(target.Center, crit);
+            OnHitEffects(target.Center, false); // critical hits will not occur in PVP
         }
         private void OnHitEffects(Vector2 targetPos, bool crit)
         {

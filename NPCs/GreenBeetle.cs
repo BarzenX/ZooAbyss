@@ -2,6 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Utilities;
+using ZooAbyss.Items;
 
 
 namespace ZooAbyss.NPCs
@@ -17,18 +18,24 @@ namespace ZooAbyss.NPCs
 
         public override void SetDefaults()
         {
-            NPC.CloneDefaults(NPCID.Snail);
             NPC.width = 30;
             NPC.height = 30;
             NPC.scale = 0.25f;
             NPC.damage = 0;
             NPC.defense = 0;
-            NPC.npcSlots = 0.5f;
-            AIType = NPCID.Snail;
-            AnimationType = NPCID.Snail;
             NPC.lifeMax = 10;
-            NPC.value = 0;
+            NPC.value = 0f;
             NPC.chaseable = false;
+            NPC.npcSlots = 0.5f;
+            NPC.aiStyle = 67;
+            NPC.HitSound = SoundID.NPCHit1;
+            NPC.DeathSound = SoundID.NPCDeath1;
+            AIType = NPCID.Buggy;
+            AnimationType = NPCID.Buggy;
+            Main.npcCatchable[NPC.type] = true;
+            NPC.catchItem = ModContent.ItemType<GreenBeetleItem>();
+
+
 
 
         }

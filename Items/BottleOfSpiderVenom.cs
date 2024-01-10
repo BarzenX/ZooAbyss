@@ -10,8 +10,6 @@ namespace ZooAbyss.Items
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Bottle Of Spider Venom");
-            Tooltip.SetDefault("Its make you Sleepy");
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

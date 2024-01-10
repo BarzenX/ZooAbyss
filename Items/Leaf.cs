@@ -1,5 +1,8 @@
-﻿using Terraria.ID;
+﻿using Terraria;
+using Terraria.GameContent.Creative;
+using Terraria.ID;
 using Terraria.ModLoader;
+using ZooAbyss.Bosses.BossMinionsAndAtk;
 
 namespace ZooAbyss.Items
 {
@@ -7,8 +10,12 @@ namespace ZooAbyss.Items
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Leaf");
-            SacrificeTotal = 10;
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 10;
+        }
+        public override void SetDefaults()
+        {
+            Item.maxStack = Item.CommonMaxStack;
+            Item.rare = ItemRarityID.White;
         }
         public override void AddRecipes()
         {

@@ -6,12 +6,6 @@ namespace ZooAbyss.Bosses.BossItems
 {
     public class WormMusicBoxItem : ModItem
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Music Box");
-            Tooltip.SetDefault("Plays a tune when activated");
-        }
-
         public override void SetDefaults()
         {
             Item.width = 32;
@@ -21,7 +15,7 @@ namespace ZooAbyss.Bosses.BossItems
             Item.autoReuse = true;
             Item.useAnimation = 15;
             Item.useTime = 15;
-            Item.useStyle = 1;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.consumable = true;
             Item.createTile = ModContent.TileType<WormMusicBoxTile>();
             Item.value = 5;

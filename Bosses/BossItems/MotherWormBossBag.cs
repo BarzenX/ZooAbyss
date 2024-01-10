@@ -18,9 +18,6 @@ namespace ZooAbyss.Bosses.BossItems
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("MotherWurmBag");
-            Tooltip.SetDefault("{$CommonItemTooltip.RightClickToOpen}"); // References a language key that says "Right Click To Open" in the language of the game
-
             ItemID.Sets.BossBag[Type] = true; // This set is one that every boss bag should have, it, for example, lets our boss bag drop dev armor..
             ItemID.Sets.PreHardmodeLikeBossBag[Type] = true; // ..But this set ensures that dev armor will only be dropped on special world seeds, since that's the behavior of pre-hardmode boss bags.
 
@@ -68,7 +65,7 @@ namespace ZooAbyss.Bosses.BossItems
                 // This creates a randomly rotated vector of length 1, which gets it's components multiplied by the parameters
                 Vector2 direction = Main.rand.NextVector2CircularEdge(Item.width * 0.6f, Item.height * 0.6f);
                 float distance = 0.3f + Main.rand.NextFloat() * 0.5f;
-                Vector2 velocity = new Vector2(0f, -Main.rand.NextFloat() * 0.3f - 1.5f);
+                Vector2 velocity = new (0f, -Main.rand.NextFloat() * 0.3f - 1.5f);
 
                 Dust dust = Dust.NewDustPerfect(center + direction * distance, DustID.SilverFlame, velocity);
                 dust.scale = 0.5f;
@@ -97,7 +94,7 @@ namespace ZooAbyss.Bosses.BossItems
             }
 
             Vector2 frameOrigin = frame.Size() / 2f;
-            Vector2 offset = new Vector2(Item.width / 2 - frameOrigin.X, Item.height - frame.Height);
+            Vector2 offset = new (Item.width / 2 - frameOrigin.X, Item.height - frame.Height);
             Vector2 drawPos = Item.position - Main.screenPosition + frameOrigin + offset;
 
             float time = Main.GlobalTimeWrappedHourly;

@@ -7,13 +7,6 @@ namespace ZooAbyss.Weapons
 {
     public class EvilFlyKnife : ModItem
     {
-
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Evils Flying Knife");
-            Tooltip.SetDefault("Its The Ying Yang Of Evil");
-        }
-
         public override void SetDefaults()
         {
             Item.damage = 65;

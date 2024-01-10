@@ -11,9 +11,7 @@ namespace ZooAbyss.NPCs
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Cobra");
             Main.npcFrameCount[NPC.type] = 3;
-
         }
 
         public override void SetDefaults()
@@ -41,7 +39,7 @@ namespace ZooAbyss.NPCs
         {
             return SpawnCondition.OverworldDayDesert.Chance * 0.60f;
         }
-        public override void OnHitByProjectile(Projectile projectile, int damage, float knockback, bool crit)
+        public override void OnHitByProjectile(Projectile projectile, NPC.HitInfo hit, int damageDone)
         {
             Main.npcCatchable[NPC.type] = true;
             NPC.catchItem = ModContent.ItemType<CobraItem>();

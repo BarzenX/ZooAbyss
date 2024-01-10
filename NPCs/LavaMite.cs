@@ -12,8 +12,9 @@ namespace ZooAbyss.NPCs
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Lava Mite");
             Main.npcFrameCount[NPC.type] = 2;
+            Main.npcCatchable[NPC.type] = true;
+            NPCID.Sets.CountsAsCritter[NPC.type] = true;
         }
 
         public override void SetDefaults()

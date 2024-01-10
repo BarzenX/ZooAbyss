@@ -2,7 +2,7 @@
 using Terraria.GameContent.Creative;
 using Terraria.ID;
 using Terraria.ModLoader;
-using ZooAbyss.Edits;
+using ZooAbyss.DamageClasses;
 using ZooAbyss.Items;
 
 namespace ZooAbyss.Armor
@@ -14,9 +14,6 @@ namespace ZooAbyss.Armor
     {
         public override void SetStaticDefaults()
         {
-            // Item Name, Flavor Text
-            DisplayName.SetDefault("LeafOverdoseMask");
-            Tooltip.SetDefault("Get Your Head in the Trees.");
             // Journey Mode sacrifice/research amount.
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;
 
@@ -53,8 +50,8 @@ namespace ZooAbyss.Armor
         public override void UpdateArmorSet(Player player)
         {
             //If set complete (Refer to IsArmorSet), apply following bonuses:
-            player.setBonus = "Increases Fauna dealt damage by 5%"; // This is the setbonus tooltip
-            player.GetDamage<Flutter>() += 0.05f;
+            player.setBonus = "5% increased flora damage"; // This is the setbonus tooltip
+            player.GetDamage<CaretakerFlutterDamageClass>() += 0.05f;
             player.moveSpeed += 0.1f;
         }
         public override void UpdateEquip(Player player)

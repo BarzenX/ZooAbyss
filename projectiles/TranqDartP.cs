@@ -7,11 +7,6 @@ namespace ZooAbyss.projectiles
 {
     public class TranqDartP : ModProjectile
     {
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("TranqDartP");
-        }
-
         public override void SetDefaults()
         {
             Projectile.DamageType = DamageClass.Ranged;
@@ -39,6 +34,11 @@ namespace ZooAbyss.projectiles
             Main.dust[dust2].noGravity = true;
             Main.dust[dust2].velocity *= 0.3f;
             Main.dust[dust2].scale = (float)Main.rand.Next(50, 135) * 0.013f;
+        }
+
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            target.AddBuff(BuffID.Poisoned, 600);
         }
 
     }

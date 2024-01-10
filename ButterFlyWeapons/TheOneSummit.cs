@@ -1,25 +1,18 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using ZooAbyss.Edits;
+using ZooAbyss.DamageClasses;
 using ZooAbyss.SummitProj;
 
 namespace ZooAbyss.ButterFlyWeapons
 {
     public class TheOneSummit : ModItem
     {
-
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("TheOneSummit");
-            Tooltip.SetDefault("What is it doing down here?");
-        }
-
         public override void SetDefaults()
         {
             Item.damage = 500;
             Item.knockBack = 2;
-            Item.DamageType = ModContent.GetInstance<Flutter>();
+            Item.DamageType = ModContent.GetInstance<CaretakerFlutterDamageClass>();
             Item.noUseGraphic = true;
             Item.useTime = 10;
             Item.autoReuse = false;
@@ -47,7 +40,7 @@ namespace ZooAbyss.ButterFlyWeapons
                 .AddIngredient(ModContent.ItemType<PlantFerra>(), 1)
                 .AddIngredient(ModContent.ItemType<TerraButterFly>(), 1)
                 .AddIngredient(ModContent.ItemType<KingButterFly>(), 1)
-                .AddIngredient(ModContent.ItemType<HallowedButterFly>(), 1)
+                .AddIngredient(ModContent.ItemType<QueenButterFly>(), 1)
                 .AddIngredient(ItemID.Bananarang, 10)
                 .AddIngredient(ItemID.FlyingKnife, 1)
                 .AddIngredient(ItemID.CombatWrench, 1)
@@ -65,7 +58,7 @@ namespace ZooAbyss.ButterFlyWeapons
              .AddIngredient(ModContent.ItemType<PlantFerra>(), 1)
              .AddIngredient(ModContent.ItemType<TerraButterFly>(), 1)
              .AddIngredient(ModContent.ItemType<KingButterFly>(), 1)
-             .AddIngredient(ModContent.ItemType<HallowedButterFly>(), 1)
+             .AddIngredient(ModContent.ItemType<QueenButterFly>(), 1)
              .AddIngredient(ItemID.Bananarang, 10)
              .AddIngredient(ItemID.FlyingKnife, 1)
              .AddIngredient(ItemID.CombatWrench, 1)
