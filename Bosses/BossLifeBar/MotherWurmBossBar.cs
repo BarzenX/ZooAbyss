@@ -39,8 +39,7 @@ namespace ZooAbyss.Bosses.BossLifeBar
 
             // We assign bossHeadIndex here because we need to use it in GetIconTexture
             if (bossHeadIndex == -1)    bossHeadIndex = bossBarNPC.GetBossHeadTextureIndex();
-            //Main.NewText($"BossBar: Idx:{bossHeadIndex}   |   {(bossBarNPC.ModNPC as BossWorm).BossWormEntityNPC.NPC.GetBossHeadTextureIndex()} |   Path:{(bossBarNPC.ModNPC as BossWorm).NPC.GetBossHeadTextureIndex()}   |   NPC:{bossBarNPC}  |  ModNPC{bossBarNPC.ModNPC}");
-
+            
             life = (bossBarNPC.ModNPC as BossWorm).BossWormEntityNPC.TotalCurrentLife;
             lifeMax = (bossBarNPC.ModNPC as BossWorm).BossWormEntityNPC.TotalMaxLife;
             //if (bossBarNPC.ModNPC is not MotherWurmHead myModNPC) return null; //TODO: False

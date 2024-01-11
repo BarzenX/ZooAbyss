@@ -59,7 +59,7 @@ namespace ZooAbyss.Bosses.BossMinionsAndAtk
                     jumpTimer = 0;
 
                     // Debug message
-                    Main.NewText("Spider minion jumped!");
+                    //Main.NewText("Spider minion jumped!");
                 }
                 else
                 {

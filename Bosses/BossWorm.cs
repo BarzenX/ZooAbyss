@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Humanizer;
+using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.Audio;
@@ -11,7 +12,7 @@ namespace ZooAbyss.Bosses
     public enum WormSegmentType
     {
         /// <summary>
-        /// The head segment for the worm. A boss worm can have multiple "heads" towing their following segments
+        /// The head segment for the worm. A boss worm can have multiple "heads" towing their following segments.
         /// </summary>
         Head,
         /// <summary>
@@ -29,9 +30,9 @@ namespace ZooAbyss.Bosses
     }
 
     /// <summary>
-    /// The base class for separating boss worm enemies.
+    /// The base class for separating boss worm enemies like the Eater of Worlds.
     /// </summary>
-    public abstract class BossWorm : ModNPC    // a boss worm like the Eater of Worlds
+    public abstract class BossWorm : ModNPC
     {
         /*  ai[] usage:
 		 *  
@@ -58,7 +59,7 @@ namespace ZooAbyss.Bosses
         public float Acceleration { get; set; }
 
         /// <summary>
-        /// The NPC instance of the original head segment for this worm. (it has access to all of the worms segments and stores the boss worms total health)
+        /// The NPC instance of the managing entity segment for this worm. (it has access to all of the worms segments, stores the boss worms total health and manages despawn / death)
         /// </summary>
         public BossWormEntity BossWormEntityNPC { get; set; }
 
@@ -106,7 +107,7 @@ namespace ZooAbyss.Bosses
 
                         if (!startDespawning)
                         {
-                            startDespawning = true; // set here only for the heads, as they are towing the bodies and tails
+                            startDespawning = true; // set here only for the heads, as the bodies and tails are simply following. Bodies and tails will be worked on later
 
                             // Despawn after 90 ticks (1.5 seconds) if the NPC gets far enough away
                             NPC.EncourageDespawn(90);
@@ -140,13 +141,13 @@ namespace ZooAbyss.Bosses
         internal virtual void EntityAI() { }
 
         /// <summary>
-        /// This user implementable method is getting called when the 
+        /// This user implementable method is getting called when the creating the NPC (using this class to create a NPC)
         /// </summary>
         public abstract void Init();
     }
 
     /// <summary>
-    /// The base class for the "all worm" managing entity of the boss worm. It doesn't appear as a NPC but carries the "boss" status and dies when all segments are dead
+    /// The base class for the "all worm" managing entity of the boss worm. It doesn't appear as a NPC but carries the "boss" status and dies / despawns after all segments are dead
     /// </summary>
     public abstract class BossWormEntity : BossWorm
     {
@@ -186,17 +187,17 @@ namespace ZooAbyss.Bosses
         public int MaxSegmentLength { get; set; }
 
         /// <summary>
-        /// The array where all worm segments are stored (only the main head will have this array filled)
+        /// The array where all worm segments are stored (excluding the entity)
         /// </summary>
         public NPC[] Segment { get; set; }
 
         /// <summary>
-        /// The total current life of the whole boss worm (only the main head will have this value written)
+        /// The total current life of the whole boss worm (excluding the entity's life)
         /// </summary>
         public int TotalCurrentLife { get; set; }
 
         /// <summary>
-        /// The total maximal life of the whole boss worm (only the main head will have this value written)
+        /// The total maximal life of the whole boss worm (excluding the entity's life)
         /// </summary>
         public int TotalMaxLife { get; set; }
 
@@ -206,7 +207,7 @@ namespace ZooAbyss.Bosses
         private NPC HeadStickedTo;
 
         /// <summary>
-        /// A flag that indicates, that recently a despawn happened. Initiates a check for denying the loot
+        /// A flag that indicates, that recently a despawn happened. Initiates a check for denying the loot.
         /// </summary>
         private bool DespawnHappend = false;
 
@@ -228,7 +229,7 @@ namespace ZooAbyss.Bosses
         }
 
         /// <summary>
-        /// Spawns the head, body and tail segments of the worm.
+        /// Spawns the body and tail segments of the worm.
         /// </summary>
         /// <param name="source">The spawn source</param>
         /// <param name="type">The ID of the segment NPC to spawn</param>
@@ -278,7 +279,7 @@ namespace ZooAbyss.Bosses
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
                 // So, we start the AI off by checking if the managing Entity reference is already written.
-                // As this happens only after this method is run once, it means this is the first update of the method.
+                // As this happens only after this method is executed once, it means this is the first update of the method.
                 // Since this is the first update, we can safely assume we need to spawn the the noss worm (head + bodies + tail).
                 bool hasEntityNotWritten = (this.BossWormEntityNPC is null);
                 if (hasEntityNotWritten)
@@ -297,14 +298,14 @@ namespace ZooAbyss.Bosses
 
                     // Here we determine the length of the worm, randomly.
                     int randomWormLength = Main.rand.Next(MinSegmentLength, MaxSegmentLength + 1);
-                    randomWormLength = (randomWormLength < 2) ? 2 : (randomWormLength > 200) ? 200 : randomWormLength; // 2 <= randomWormLength <= 200
+                    randomWormLength = (randomWormLength < 2) ? 2 : (randomWormLength > 199) ? 199 : randomWormLength; // 2 <= randomWormLength <= 199
                     int bodySegmentCount = randomWormLength - 2; // "-2" because there the head and the tail aren't body segments
 
                     // initialize the Segment array that will be used for calulating the worms health
                     Segment = new NPC[randomWormLength];
-                    Segment[0] = Main.npc[latestNpcIdx]; // store head as first element in segment array
-                    HeadStickedTo = Segment[0]; //choose the head as the NPC where the Entity sticks to
-                    int segmentIdx = 1; // for writing all the other segements
+                    Segment[0] = Main.npc[latestNpcIdx]; // store head as first element in the segment array
+                    HeadStickedTo = Segment[0]; // choose the head as the NPC where the Entity sticks to
+                    int segmentIdx = 1; // init for writing all the other segements
 
                     if (HasCustomBodySegments) // --> false for this boss worm
                     {
@@ -319,7 +320,7 @@ namespace ZooAbyss.Bosses
                             latestNpcIdx = SpawnSegment(source, BodyType, latestNpcIdx, BossWormEntityNPC);
                             bodySegmentCount--;
 
-                            Segment[segmentIdx] = Main.npc[latestNpcIdx]; // add this segment to the array
+                            Segment[segmentIdx] = Main.npc[latestNpcIdx]; // add this body to the array
                             segmentIdx++;
                         }
                     }
@@ -374,7 +375,7 @@ namespace ZooAbyss.Bosses
             int currentLife = 0;
             for (int i = 0; i < BossWormEntityNPC.Segment.Length; i++)
             {
-                if (BossWormEntityNPC.Segment[i].active) //reading a bool is more memory efficient than reading and comparing an int
+                if (BossWormEntityNPC.Segment[i].active) //reading a bool is more memory efficient than reading and comparing an int :-P
                 {
                     if (BossWormEntityNPC.Segment[i].life <= 0) // I didn't want to believe it, but yes sometimes aa segment has negative life!....maybe this happens due to lag?
                     {
@@ -383,8 +384,10 @@ namespace ZooAbyss.Bosses
                         BossWormEntityNPC.Segment[i].active = false;
                         NetMessage.SendData(MessageID.DamageNPC, -1, -1, null, BossWormEntityNPC.Segment[i].whoAmI, -1f);
                     }
+
                     currentLife += BossWormEntityNPC.Segment[i].life;
 
+                    // a head wants to despawn, propagate it to its following segments
                     if (((BossWormEntityNPC.Segment[i].ModNPC as BossWorm).startDespawning) &&
                         !((BossWormEntityNPC.Segment[i].ModNPC as BossWorm).startDespawningPropagated))
                     {
@@ -392,6 +395,7 @@ namespace ZooAbyss.Bosses
                     }
                 }
             }
+
             TotalCurrentLife = currentLife;
 
             return TotalCurrentLife;
@@ -402,21 +406,22 @@ namespace ZooAbyss.Bosses
         /// </summary>
         private void EntityAI_StickToHead()
         {
-            // find an active BossWormHead and stick to it if the first head died
+            // find an active BossWormHead if the first head died
             if ((HeadStickedTo.life <= 0) && // the sticked to NPC is dead
                  (Segment.Length > 0)) // just to be 100% sure the data is there
             {
                 for (int i = 0; i < Segment.Length; i++)
                 {
-                    if ((Segment[i].active) &&
-                         (Segment[i].ModNPC.Type == HeadType))
+                    if ( (Segment[i].active) &&
+                         (Segment[i].ModNPC.Type == HeadType) )
                     {
                         HeadStickedTo = Segment[i];
-                        Main.NewText($"StickToHead: {i}");
                         break;
                     }
                 }
             }
+
+            // stick to the head
             if (HeadStickedTo is not null) this.NPC.position = HeadStickedTo.position;
         }
 
@@ -427,25 +432,23 @@ namespace ZooAbyss.Bosses
         {
             bool followerExist = ((startSegment.ModNPC as BossWorm).FollowerNPC is not null); // the "startDespawning" is always set by heads, so only look at the followers
             NPC propagateNPC = startSegment; // init
-            Main.NewText($"Despawn: Start:{startSegment.whoAmI}");
+
             while (followerExist)
             {
                 propagateNPC = (propagateNPC.ModNPC as BossWorm).FollowerNPC; // get the next follower
 
                 // set despawn values
                 (propagateNPC.ModNPC as BossWorm).startDespawning = true;
-                (propagateNPC.ModNPC as BossWorm).startDespawningPropagated = true; //mark as "done"
+                (propagateNPC.ModNPC as BossWorm).startDespawningPropagated = true; //mark segment as "done"
                 propagateNPC.EncourageDespawn(90);
 
                 // update WHILE condition
                 followerExist = ((propagateNPC.ModNPC as BossWorm).FollowerNPC is not null);
-
-                Main.NewText($"Despawn: Propagated:{propagateNPC.whoAmI}");
             }
 
             // finish
-            (startSegment.ModNPC as BossWorm).startDespawningPropagated = true; //mark as "done"
-            ((startSegment.ModNPC as BossWorm).BossWormEntityNPC as BossWormEntity).DespawnHappend = true;
+            (startSegment.ModNPC as BossWorm).startDespawningPropagated = true; //mark head as "done"
+            ((startSegment.ModNPC as BossWorm).BossWormEntityNPC as BossWormEntity).DespawnHappend = true; // inform Entity
         }
 
         /// <summary>
@@ -460,34 +463,31 @@ namespace ZooAbyss.Bosses
                     Segment[i].active)
                 {
                     denyLootLocal &= (Segment[i].ModNPC as BossWorm).startDespawningPropagated;
-                    Main.NewText($"DenyLoot: HeadNPC: {Segment[i].whoAmI}   |   Active:{Segment[i].active}   |   Propagated:{(Segment[i].ModNPC as BossWorm).startDespawningPropagated}");
                 }
             }
-            Main.NewText($"DenyLoot: Sum:{denyLootLocal}");
             return denyLootLocal;
         }
 
         /// <summary>
-        /// Checks if all of the BossWorm segments are dead and kills the BossWormEntity if so
+        /// Checks if all BossWorm segments are dead and kills / despawns the BossWormEntity
         /// </summary>
         public virtual bool CheckIfDead()
         {
-            bool someSegmentStillAlive = false;
+            bool someSegmentStillAlive = false; //init
             for (int i = 0; i < BossWormEntityNPC.Segment.Length; i++)
             {
                 someSegmentStillAlive |= BossWormEntityNPC.Segment[i].active;
             }
-            Main.NewText($"CheckIfDead: SegmentsAlive: {someSegmentStillAlive}   |   DenyLoot{DenyLoot}");
+
             if (!someSegmentStillAlive) // No BossWorm segment alive anymore
             {
                 if (DenyLoot) // no loot
                 {
-                    //despawn the entity
-                    //BossWormEntityNPC.NPC.active = false;
+                    //despawn the BossWormEntity
                     startDespawning = true;
                     return true;
                 }
-                else if (BossWormEntityNPC.NPC.life != 0) //BossWormEntity still alive
+                else if (BossWormEntityNPC.NPC.life != 0) // BossWormEntity still alive
                 {
                     //kill the BossWormEntity
                     BossWormEntityNPC.NPC.life = 0;
@@ -540,9 +540,9 @@ namespace ZooAbyss.Bosses
         {
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
-                if ((!worm.FollowerNPC.active)) // the segment after this head has died
+                if ((!worm.FollowerNPC.active)) // the segment behind this head has died
                 {
-                    worm.NPC.life = 0; //kill this bodyless head
+                    worm.NPC.life = 0; //kill this segmentsless head
                     worm.NPC.HitEffect(0, 10);
                     worm.NPC.checkDead();
                     worm.NPC.active = false;
@@ -832,10 +832,6 @@ namespace ZooAbyss.Bosses
             if (((NPC.velocity.X > 0 && NPC.oldVelocity.X < 0) || (NPC.velocity.X < 0 && NPC.oldVelocity.X > 0) || (NPC.velocity.Y > 0 && NPC.oldVelocity.Y < 0) || (NPC.velocity.Y < 0 && NPC.oldVelocity.Y > 0)) && !NPC.justHit)
                 NPC.netUpdate = true;
         }
-
-        /// <summary>
-        /// This method caculates and returns the worm bosses actual and total health (only possible for the original head)
-        /// </summary>
     }
 
     public abstract class BossWormBody : BossWorm
@@ -856,66 +852,58 @@ namespace ZooAbyss.Bosses
 
             NPC following = worm.NPC.ai[1] >= Main.maxNPCs ? null : worm.FollowingNPC;
              if (Main.netMode != NetmodeID.MultiplayerClient)
-            {
-                if ( (!worm.FollowingNPC.active) || (worm.FollowingNPC.aiStyle != worm.NPC.aiStyle) ) // the segment in front of this body has died or has no "body-segment-AI"
-                {
-                    int changeType = ((worm.NPC.ModNPC as BossWorm).BossWormEntityNPC as BossWormEntity).HeadType;
-                    int temp38 = worm.NPC.whoAmI;
-                    float temp39 = (float)worm.NPC.life / (float)worm.NPC.lifeMax;
-                    float temp40 = worm.NPC.ai[0];
-                    BossWormEntity temp41 = worm.BossWormEntityNPC;
-
-                    worm.NPC.SetDefaultsKeepPlayerInteraction(changeType); //change this segment into a boss worm head
-
-                    worm.NPC.life = (int)((float)worm.NPC.lifeMax * temp39);
-                    worm.NPC.ai[0] = temp40;
-                    worm.NPC.TargetClosest();
-                    worm.NPC.netUpdate = true;
-                    worm.NPC.whoAmI = temp38;
-                    worm.NPC.alpha = 0;
-                    (worm.NPC.ModNPC as BossWorm).BossWormEntityNPC = temp41;
-                    return;
-                }
-
-                if ((!worm.FollowerNPC.active) || (worm.FollowerNPC.aiStyle != worm.NPC.aiStyle)) // the segment after this body has died or has no "body-segment-AI"
-                {
-                    int changeType = ((worm.NPC.ModNPC as BossWorm).BossWormEntityNPC as BossWormEntity).TailType;
-                    int temp38 = worm.NPC.whoAmI;
-                    float temp39 = (float)worm.NPC.life / (float)worm.NPC.lifeMax;
-                    float temp40 = worm.NPC.ai[1];
-                    BossWormEntity temp41 = BossWormEntityNPC;
-
-                    worm.NPC.SetDefaultsKeepPlayerInteraction(changeType); //change this segment into a boss worm tail
-
-                    worm.NPC.life = (int)((float)worm.NPC.lifeMax * temp39);
-                    worm.NPC.ai[1] = temp40;
-                    worm.NPC.TargetClosest();
-                    worm.NPC.netUpdate = true;
-                    worm.NPC.whoAmI = temp38;
-                    worm.NPC.alpha = 0;
-                    (worm.NPC.ModNPC as BossWorm).BossWormEntityNPC = temp41;
-                    return;
-                }
-
-                if ((!worm.FollowerNPC.active) && (!worm.FollowingNPC.active)) // the segment after AND in front of this body have died
-                {
-                    worm.NPC.life = 0; //kill this connectionless body
-                    worm.NPC.HitEffect(0, 10);
-                    worm.NPC.checkDead();
-                    worm.NPC.active = false;
-                    NetMessage.SendData(MessageID.DamageNPC, -1, -1, null, worm.NPC.whoAmI, -1f);
-
-                    return;
-                }
-                //// Some of these conditions are possible if the body/tail segment was spawned individually
-                //// Kill the segment if the segment NPC it's following is no longer valid
-                //if (following is null || !following.active || following.friendly || following.townNPC || following.lifeMax <= 5)
-                //{
-                //    worm.NPC.life = 0;
-                //    worm.NPC.HitEffect(0, 10);
-                //    worm.NPC.active = false;
-                //}
-            }
+             {
+                 if ( (!worm.FollowingNPC.active) || (worm.FollowingNPC.aiStyle != worm.NPC.aiStyle) ) // the segment in front of this body has died or has no "body-segment-AI"
+                 {
+                     int changeType = ((worm.NPC.ModNPC as BossWorm).BossWormEntityNPC as BossWormEntity).HeadType;
+                     int temp38 = worm.NPC.whoAmI;
+                     float temp39 = (float)worm.NPC.life / (float)worm.NPC.lifeMax;
+                     float temp40 = worm.NPC.ai[0];
+                     BossWormEntity temp41 = worm.BossWormEntityNPC;
+                 
+                     worm.NPC.SetDefaultsKeepPlayerInteraction(changeType); //change this segment into a boss worm head
+                 
+                     worm.NPC.life = (int)((float)worm.NPC.lifeMax * temp39);
+                     worm.NPC.ai[0] = temp40;
+                     worm.NPC.TargetClosest();
+                     worm.NPC.netUpdate = true;
+                     worm.NPC.whoAmI = temp38;
+                     worm.NPC.alpha = 0;
+                     (worm.NPC.ModNPC as BossWorm).BossWormEntityNPC = temp41;
+                     return;
+                 }
+                 
+                 if ((!worm.FollowerNPC.active) || (worm.FollowerNPC.aiStyle != worm.NPC.aiStyle)) // the segment after this body has died or has no "body-segment-AI"
+                 {
+                     int changeType = ((worm.NPC.ModNPC as BossWorm).BossWormEntityNPC as BossWormEntity).TailType;
+                     int temp38 = worm.NPC.whoAmI;
+                     float temp39 = (float)worm.NPC.life / (float)worm.NPC.lifeMax;
+                     float temp40 = worm.NPC.ai[1];
+                     BossWormEntity temp41 = BossWormEntityNPC;
+                 
+                     worm.NPC.SetDefaultsKeepPlayerInteraction(changeType); //change this segment into a boss worm tail
+                 
+                     worm.NPC.life = (int)((float)worm.NPC.lifeMax * temp39);
+                     worm.NPC.ai[1] = temp40;
+                     worm.NPC.TargetClosest();
+                     worm.NPC.netUpdate = true;
+                     worm.NPC.whoAmI = temp38;
+                     worm.NPC.alpha = 0;
+                     (worm.NPC.ModNPC as BossWorm).BossWormEntityNPC = temp41;
+                     return;
+                 }
+                 
+                 if ((!worm.FollowerNPC.active) && (!worm.FollowingNPC.active)) // the segment after AND in front of this body have died
+                 {
+                     worm.NPC.life = 0; //kill this connectionless body
+                     worm.NPC.HitEffect(0, 10);
+                     worm.NPC.checkDead();
+                     worm.NPC.active = false;
+                     NetMessage.SendData(MessageID.DamageNPC, -1, -1, null, worm.NPC.whoAmI, -1f);
+                 
+                     return;
+                 }
+             }
 
             if (following is not null)
             {
@@ -942,7 +930,6 @@ namespace ZooAbyss.Bosses
         }
     }
 
-    // Since the body and tail segments share the same AI
     public abstract class BossWormTail : BossWorm
     {
         public sealed override WormSegmentType SegmentType => WormSegmentType.Tail;
